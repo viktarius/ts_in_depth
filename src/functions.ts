@@ -172,6 +172,10 @@ function getBookProp(book: Book, prop: BookProperties) {
 //         , 0n);
 // }
 
+export function purge<T>(inventary: Array<T>): Array<T> {
+    return inventary.slice(2);
+}
+
 export {
     getAllBooks, 
     getBookById,

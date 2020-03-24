@@ -1,9 +1,15 @@
-import { Book, Person } from "./interfaces";
+import { Book, Person, Author } from "./interfaces";
 
-type BookProperties = keyof Book;
+export type BookProperties = keyof Book;
 
-type PersonBook = Person & Book;
+export type PersonBook = Person & Book;
 
-type BookOrUndefiend = Book | undefined;
+export type BookOrUndefiend = Book | undefined;
 
-export {BookProperties, PersonBook, BookOrUndefiend}
+export type BookRequiredFields = Required<Book>;
+
+export type UpdatedBook = Partial<Book>;
+
+export type AuthorWoEmail = Omit<Author, 'email'>;
+
+export type СreateCustomerFunctionType  = (name: string, age?: number, city?: string) => void

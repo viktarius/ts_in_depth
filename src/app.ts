@@ -1,8 +1,8 @@
 import {Category} from './enums';
-import {Book, Logger, Person, Author, Librarian} from './interfaces';
-import {BookProperties, PersonBook, BookOrUndefiend} from './types';
-import {getBookById, getBookTitlesByCategory, createCustomerID, getTitles, bookTitleTransform, getAllBooks, printBook, getBookProp } from './functions';
-import {RefBook, UniversityLibrarian} from './classes';
+import {Book, Logger, Person, Author, Librarian, Magazine} from './interfaces';
+import {BookProperties, PersonBook, BookOrUndefiend, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType} from './types';
+import {getBookById, getBookTitlesByCategory, createCustomerID, getTitles, bookTitleTransform, getAllBooks, printBook, getBookProp, purge, createCustomer } from './functions';
+import {RefBook, UniversityLibrarian, Shelf} from './classes';
 
 showHello('greeting', 'TypeScript');
 
@@ -145,3 +145,57 @@ import('./classes')
         reader.name = 'Anna';
         reader.take(getAllBooks()[1]);
     })
+
+// TASK 07.01
+const inventory = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+    ]; 
+    
+// const resultInventory = purge(inventory);
+// console.log(resultInventory);
+// const resultNumber = purge([1,2,3,4,5,6]);
+// console.log(resultNumber);
+
+// TASK 07.02
+const bookShelf = new Shelf<Book>();
+inventory.forEach(item => bookShelf.add(item));
+console.log(bookShelf.getFirst().title)
+
+const magazine = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' }
+];
+const magazineShelf = new Shelf<Magazine>();
+magazine.forEach(item => magazineShelf.add(item));
+console.log(magazineShelf.getFirst())
+
+// TASK 07.03
+magazineShelf.printTitles();
+console.log(magazineShelf.find('Five Points'));
+
+// TASK 07.04
+const book: BookRequiredFields = {
+    id: 1,
+    title: 'title',
+    author: 'Dohn Doe',
+    available: true,
+    category: Category.Software,
+    pages: 222,
+    markDamaged: null
+}
+console.log(book);
+
+const updatedBook: UpdatedBook = {
+    id: 23,
+    title: 'ez way'
+}
+updatedBook.category = Category.JavaScript;
+console.log(updatedBook);
+
+const params: Parameters<СreateCustomerFunctionType> = ['Anna'];
+createCustomer(...params);
+
