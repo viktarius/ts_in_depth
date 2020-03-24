@@ -195,6 +195,32 @@ function showHello(divName: string, name: string) {
 // createCustomer(...params);
 
 // TASK 08.01
-const l  = new UniversityLibrarian();
-l.name = "Bob";
-l['printLabrarian']();
+// const l  = new UniversityLibrarian();
+// l.name = "Bob";
+// l['printLabrarian']();
+
+// TASK 08.03
+// const lab  = new UniversityLibrarian();
+// lab.assistFaculty = null;
+// lab.techCommunity = null;
+// console.log(lab);
+
+// TASK 08.04
+// const enc = new RefBook('tutke', 1999, 2000);
+// enc.printItems();
+
+
+// TASK 08.05
+// const labL  = new UniversityLibrarian();
+// labL.name = 'Anna';
+// labL.assistustomers('Billy');
+
+// TASK 08.06
+// const UL = new UniversityLibrarian();
+// UL.name = 'Util';
+// console.log(UL.name);
+
+// TASK 08.07
+const enciclop = new RefBook('titile', 2000, 10);
+enciclop.copies = 10;
+enciclop.copies = -10;
