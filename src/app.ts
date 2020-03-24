@@ -95,7 +95,7 @@ function getBookAuthorByIndex(index: number): [string, string] {
 // console.log(calcTotalPages());
 
 // TASK 03.01
-function getBookById(id: number) {
+function getBookById(id: number): BookOrUndefiend {
     const books = getAllBooks();
     return books.find(book => book['id'] === id)
 }
@@ -189,7 +189,6 @@ const checkoutBooks2 = getTitles(2, false);
 console.log(checkoutBooks2);
 
 // TASK 03.05
-
 function assertStringValue(value: any): asserts value is string {
     if (typeof value !== 'string') {
         throw new Error('value should have been a string');
@@ -210,7 +209,6 @@ try {
 }
 
 // TASK 04.01
-
 interface Book {
     id: number;
     title: string;
@@ -242,7 +240,6 @@ printBook(myBook);
 myBook.markDamaged('missing back cover');
 
 // TASK 04.02
-
 interface DamageLogger {
     (reason: string): void
 }
@@ -301,8 +298,7 @@ console.log(getBookProp(getAllBooks()[0], 'markDamaged'));
 // console.log(getBookProp(getAllBooks()[0], 'isbn'));
 
 // TASK 05.01
-
-class ReferenceItem {
+abstract class ReferenceItem {
     // title: string;
     // year: number;
     private _publisher: string;
@@ -328,14 +324,16 @@ class ReferenceItem {
         this._publisher = newPublisher;
     }
 
+    abstract printCitation(): void;
+
     static department: string = "Classical";
 }
 
-const ref  = new ReferenceItem('myTitle', 2020);
-console.log(ref);
-ref.printItems();
-ref.publisher = 'smth';
-console.log(ref.publisher);
+// const ref = new ReferenceItem('myTitle', 2020);
+// console.log(ref);
+// ref.printItems();
+// ref.publisher = 'smth';
+// console.log(ref.publisher);
 
 // TASK 05.02
 class Encyclopedia extends ReferenceItem{
@@ -348,6 +346,10 @@ class Encyclopedia extends ReferenceItem{
         console.log(`edition: ${this.edition} (${this.year})`)
 
     }
+
+    printCitation(): void{
+        console.log(`${this.title} - ${this.year}`)
+    }
 }
 
 const refBook = new Encyclopedia('enc: title', 2020, 10);
@@ -355,3 +357,39 @@ console.log(refBook);
 refBook.printItems();
 refBook.publisher = 'abc';
 console.log(refBook.publisher);
+
+// TASK 05.03
+refBook.printCitation();
+
+// TASK 05.04
+class UniversityLibrarian implements Librarian{
+    name: string;
+    email: string;
+    department: string;
+
+    assistustomers(custName: string): void{
+        console.log(`${this.name} is assisting ${custName}`)
+    }
+}
+
+const favoriteLabrerian1: Librarian = new UniversityLibrarian();
+console.log(favoriteLabrerian1)
+favoriteLabrerian1.name = "Ann";
+favoriteLabrerian1.assistustomers("Bob");
+
+// TASK 05.05
+
+type PersonBook = Person & Book;
+const personBook: PersonBook = {
+    name: 'Anna',
+    email: 'anna@gmail.com',
+
+    id: 5,
+    title: 'My Title',
+    available: true,
+    category: Category.CSS,
+    author: 'Anton Pelex'
+} 
+console.log(personBook);
+
+type BookOrUndefiend = Book | undefined;
